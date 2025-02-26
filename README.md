@@ -29,6 +29,13 @@ CREATE TABLE users (
 ```
 
 - Add dummy users
+```sh
+INSERT INTO users (name, email, phone, password_hash, role) VALUES
+('Alice Johnson', 'alice@example.com', '1234567890', 'hashedpassword1', 'user'),
+('Bob Smith', 'bob@example.com', '9876543210', 'hashedpassword2', 'admin'),
+('Charlie Brown', 'charlie@example.com', '1122334455', 'hashedpassword3', 'user'),
+('David Lee', 'david@example.com', '5566778899', 'hashedpassword4', 'user');
+```
 
 ### 4.Run the project
 ```sh
