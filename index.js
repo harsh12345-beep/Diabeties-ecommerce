@@ -1,32 +1,24 @@
-const express = require ('express');
-const mysql = require('mysql2');
+const express = require("express");
+const dotenv = require("dotenv");
+const db = require("./src/config/db");
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'test',
+// Middleware
+app.use(express.json());
+
+// Routes
+const userRoutes = require("./src/routes/userRoutes");
+app.use("/users", userRoutes);
+
+// Test Route
+app.get("/", (req, res) => {
+  res.send("Welcome to the E-Commerce API");
 });
 
-try {
-  connection.connect();
-  console.log("connected with database")
-  
-} catch (error) {
-  console.log(error);
-  
-}
-
-console.log(connection);
-
-
-app.get('/',(req,res)=>{
-  res.send("Welcome");
-})
-
-app.listen(PORT,()=>(
-  console.log("working fine")
-));
+// Start Server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
