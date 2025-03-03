@@ -1,10 +1,12 @@
 const db = require("../config/db");
 
-exports.findUserByEmail = async (email) => {
-  const [rows] = await db.execute("SELECT * FROM users WHERE email = ?", [email]);
-  return rows.length > 0 ? rows[0] : null;
+exports.createUser = async (name, email, passwordHash) => {
+  const sql = "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)";
+  await db.execute(sql, [name, email, passwordHash]); // Use passwordHash, NOT password
 };
 
-exports.createUser = async (name, email, hashedPassword) => {
-  return db.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
+exports.findUserByEmail = async (email) => {
+  const sql = "SELECT id, name, email, password_hash, role FROM users WHERE email = ?";
+  const [rows] = await db.execute(sql, [email]);
+  return rows; // Ensure it returns an array
 };

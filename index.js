@@ -2,31 +2,45 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
-require("dotenv").config(); // Load environment variables
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
+dotenv.config();
 
 const db = require("./src/config/db");
 const bodyParser = require("body-parser");
 const authRoutes = require("./src/routes/auth");
 const productRoute = require("./src/routes/productRoute");
 
-dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 // Middleware
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // Allow frontend
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+// 🔹 Session Middleware (Stores Session in Memory)
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "mySecretKey", // Change this to a secure value
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // ❌ Set `true` in production with HTTPS
+      httpOnly: true, // ✅ Prevent client-side access
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    },
+  })
+);
 
 // Routes
 const userRoutes = require("./src/routes/userRoutes");
 app.use("/users", userRoutes);
-
 app.use("/api/products", productRoute);
 app.use("/auth", authRoutes);
-
 
 // Test Route
 app.get("/", (req, res) => {
