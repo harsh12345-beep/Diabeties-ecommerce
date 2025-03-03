@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
+const db = require("../config/db");
+
 exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -25,35 +27,31 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const [users] = await db.execute("SELECT * FROM users WHERE email = ?", [email]);
 
-    if (!email || !password) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
-    const users = await userModel.findUserByEmail(email);
     if (users.length === 0) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
     const user = users[0];
-
     const isMatch = await bcrypt.compare(password, user.password_hash);
+
     if (!isMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
     // ✅ Store user ID in session
     req.session.userId = user.id;
 
-    res.status(200).json({
-      message: "Login successful",
-      user: { id: user.id, name: user.name, email: user.email },
-    });
+    console.log("✅ Session Updated:", req.session);
 
-  } catch (err) {
-    console.error("Login error:", err);
+    res.json({ message: "Login successful", userId: user.id });
+  } catch (error) {
+    console.error("Login error:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
+

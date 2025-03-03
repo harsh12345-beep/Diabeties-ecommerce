@@ -1,19 +1,10 @@
-const jwt = require("jsonwebtoken");
+exports.requireAuth = (req, res, next) => {
+  console.log("Session Data:", req.session);
 
-exports.authenticate = (req, res, next) => {
-  const authHeader = req.header("Authorization");
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Access denied. No token provided." });
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Unauthorized. Please log in." });
   }
 
-  const token = authHeader.split(" ")[1];
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Attach user info to request
-    next();
-  } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
-  }
+  req.userId = req.session.userId; // Attach userId for further use
+  next();
 };

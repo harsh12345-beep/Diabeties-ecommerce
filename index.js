@@ -36,6 +36,13 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  console.log("🔹 Incoming request:", req.method, req.url);
+  console.log("🔹 Session data:", req.session);
+  next();
+});
+
+
 // Routes
 const userRoutes = require("./src/routes/userRoutes");
 app.use("/users", userRoutes);

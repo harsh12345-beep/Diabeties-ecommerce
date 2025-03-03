@@ -1,17 +1,9 @@
 const express = require("express");
-const db = require("../config/db");
-
+const { requireAuth } = require("../middleware/authMiddleware");
 const router = express.Router();
+const userController = require("../controllers/userController");
 
-// GET all users
-router.get("/", (req, res) => {
-  db.query("SELECT * FROM users", (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
-  });
-});
-
-
-//POST AND OTHER NEED TO IMPLEMENTED
+// ✅ Protect this route
+router.get("/", requireAuth, userController.getAllUsers);
 
 module.exports = router;
