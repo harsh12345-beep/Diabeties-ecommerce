@@ -10,7 +10,10 @@ dotenv.config();
 const db = require("./src/config/db");
 const bodyParser = require("body-parser");
 const authRoutes = require("./src/routes/auth");
-const productRoute = require("./src/routes/productRoute");
+const productRoutes = require("./src/routes/productRoutes");
+
+const cartRoutes = require("./src/routes/cartRoutes");
+
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -46,8 +49,14 @@ app.use((req, res, next) => {
 // Routes
 const userRoutes = require("./src/routes/userRoutes");
 app.use("/users", userRoutes);
-app.use("/api/products", productRoute);
 app.use("/auth", authRoutes);
+
+
+//Other Routes
+app.use("/products", productRoutes);
+
+app.use("/cart", cartRoutes);
+
 
 // Test Route
 app.get("/", (req, res) => {
