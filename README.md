@@ -10,7 +10,7 @@ This project consists of a **Next.js frontend** and an **Express.js backend** us
 
 ---
 
-# Backend Setup
+# Runinng the project
 
 ## 1. Clone the Repository
 ```sh
@@ -22,6 +22,7 @@ cd frontend
 ```sh
 npm install
 ```
+
 
 ## 3. XAMPP (Database Setup)
 - Install XAMPP
