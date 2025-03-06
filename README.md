@@ -72,11 +72,11 @@ npm start
 
 ---
 
-# Frontend Setup (Next.js)
+# Frontend Setup 
 
 ## 1. Clone the Repository
 ```sh
-git clone https://github.com/Abhishekyaduvanahi/frontend
+
 cd frontend
 ```
 
