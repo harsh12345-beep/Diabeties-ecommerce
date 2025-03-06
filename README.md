@@ -10,19 +10,18 @@ This project consists of a **Next.js frontend** and an **Express.js backend** us
 
 ---
 
-# Runinng the project
+# Backend Setup
 
 ## 1. Clone the Repository
 ```sh
-git clone (url)
-cd frontend
+git clone https://github.com/Abhishekyaduvanahi/backend
+cd backend
 ```
 
 ## 2. Install Dependencies
 ```sh
 npm install
 ```
-
 
 ## 3. XAMPP (Database Setup)
 - Install XAMPP
@@ -89,6 +88,20 @@ npm run dev
 ## API Endpoints
 
 ### Users
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - User login (returns token)
+- `POST /auth/logout` - User logout
+- `GET /auth/profile` - Fetch authenticated user's profile
+- `PUT /auth/profile` - Update authenticated user's profile
+- `POST /auth/forgot-password` - Initiate password reset process
+- `POST /auth/reset-password` - Reset user password
+- `GET /users` - Fetch all users
+- `POST /users` - Create a new user
+- `GET /users/:id` - Fetch user by ID
+- `PUT /users/:id` - Update user details
+- `DELETE /users/:id` - Delete user
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - User login (returns token)
 - `GET /users` - Fetch all users
 - `POST /users` - Create a new user
 - `GET /users/:id` - Fetch user by ID
