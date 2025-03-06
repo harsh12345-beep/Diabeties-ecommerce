@@ -1,7 +1,7 @@
 # Diabetes-Free Products
 
 ## Overview
-This project consists of a **Next.js frontend** and an **Express.js backend** using **MySQL2** for database management. The platform helps manage diabetes-free products efficiently.
+This project consists of a **.JSX frontend** and an **Express.js backend** using **MySQL2** for database management. The platform helps manage diabetes-free products efficiently.
 
 ## Tech Stack
 - **Frontend:** Next.js, React (.JSX We used Not .TSX)
