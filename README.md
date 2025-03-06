@@ -14,8 +14,8 @@ This project consists of a **Next.js frontend** and an **Express.js backend** us
 
 ## 1. Clone the Repository
 ```sh
-git clone https://github.com/Abhishekyaduvanahi/backend
-cd backend
+git clone (url)
+cd frontend
 ```
 
 ## 2. Install Dependencies
