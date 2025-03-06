@@ -4,17 +4,31 @@
 This project consists of a **Next.js frontend** and an **Express.js backend** using **MySQL2** for database management. The platform helps manage diabetes-free products efficiently.
 
 ## Tech Stack
-- **Frontend:** Next.js, React
+- **Frontend:** Next.js, React (.JSX We used Not .TSX)
 - **Backend:** Node.js, Express.js, MySQL2
 - **Database:** MySQL (XAMPP for local development)
 
 ---
+## 1 frontend setup
+```sh
+git clone (url)
+cd frontend
+```
 
-# Backend Setup
+## 2. Install Dependencies
+```sh
+npm install
+```
+## Run the Frontend Server
+```sh
+npm run dev
+```
+
+# backend setup
 
 ## 1. Clone the Repository
 ```sh
-git clone https://github.com/Abhishekyaduvanahi/backend
+git clone (url)
 cd backend
 ```
 
@@ -88,7 +102,7 @@ npm run dev
 ## API Endpoints
 
 ### Users
-- `POST /auth/register` - Register a new user
+- `POST /auth/singup` - Register a new user
 - `POST /auth/login` - User login (returns token)
 - `POST /auth/logout` - User logout
 - `GET /auth/profile` - Fetch authenticated user's profile
